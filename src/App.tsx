@@ -1,16 +1,15 @@
-import React from "react";
+import React, {ReactNode} from "react";
 
-function ProductCategoryRow({ category }) {
+function ProductCategoryRow({ category }: { category: ReactNode }) {
     return (
         <tr>
-            <th colSpan="2">
-                {category}
-            </th>
+            <th colSpan={2}>{category}</th>
         </tr>
     );
 }
+type Product = (typeof PRODUCTS)[number];
 
-function ProductRow({ product }) {
+function ProductRow({ product }: { product: Product }) {
     const name = product.stocked ? product.name :
         <span style={{ color: 'red' }}>
       {product.name}
@@ -24,9 +23,9 @@ function ProductRow({ product }) {
     );
 }
 
-function ProductTable({ products }) {
-    const rows = [];
-    let lastCategory = null;
+function ProductTable({ products }: { products: Product[] }) {
+    const rows: ReactNode[] = [];
+    let lastCategory: ReactNode = null;
 
     products.forEach((product) => {
         if (product.category !== lastCategory) {
@@ -70,7 +69,7 @@ function SearchBar() {
     );
 }
 
-function FilterableProductTable({ products }) {
+function FilterableProductTable({ products }: { products: Product[] }){
     return (
         <div>
             <SearchBar />
